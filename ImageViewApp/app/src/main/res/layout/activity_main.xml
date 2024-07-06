@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="200dp"
+        android:maxHeight="10dp"
+        android:src="@drawable/starry_night"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Starry Night : 빈센트 반 고흐"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:gravity="center" />
+
+<!--    오류해결 과정 : 그림을 실습 이미지로 쓰지 않은 문제로 글이 보이지 않는 문제가 발생함  -->
+
+</LinearLayout>
