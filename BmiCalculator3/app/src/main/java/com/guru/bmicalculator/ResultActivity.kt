@@ -19,8 +19,8 @@ class ResultActivity : AppCompatActivity() {
 
         resultTextView = findViewById<TextView>(R.id.textView)
         imageView = findViewById<ImageView>(R.id.imageView)
-//        name = findViewById<TextView>(R.id.nameEditText)
 
+        var name = intent.getStringExtra("name")
         var height = intent.getStringExtra("height")!!.toInt()
         var weight = intent.getStringExtra("weight")!!.toInt()
 
