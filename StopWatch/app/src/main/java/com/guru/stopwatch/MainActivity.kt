@@ -2,6 +2,7 @@ package com.guru.stopwatch
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -16,51 +17,36 @@ class MainActivity : AppCompatActivity() {
     private var isRunning = false
     private var lab = 1
 
-    lateinit var fab: FloatingActionButton
     lateinit var secTextView: TextView
     lateinit var milliTextView: TextView
-    lateinit var labLayout: LinearLayout
-    lateinit var labButton: Button
-    lateinit var resetFab: FloatingActionButton // 수정된 부분
+    lateinit var secEditText: EditText
+    lateinit var setButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        fab = findViewById(R.id.fab)
         secTextView = findViewById(R.id.secTextView)
         milliTextView = findViewById(R.id.milliTextView)
-        labLayout = findViewById(R.id.labLayout)
-        labButton = findViewById(R.id.labButton)
-        resetFab = findViewById(R.id.resetFab) // 수정된 부분
+        secEditText = findViewById(R.id.secEditText)
+        setButton = findViewById(R.id.setButton)
 
-        fab.setOnClickListener {
-            isRunning = !isRunning
-
-            if (isRunning) {
-                start()
-            } else {
-                pause()
-            }
-        }
-
-        labButton.setOnClickListener {
-            recordLabTime()
-        }
-
-        resetFab.setOnClickListener {
-            reset()
+        setButton.setOnClickListener {
+            time = secEditText.text.toString().toInt() * 100 // milli를 sec으로 바꾸기 위해 100을 곱함
+            start()
         }
     }
 
     private fun start() {
-        fab.setImageResource(R.drawable.baseline_pause_24)
+//        fab.setImageResource(R.drawable.baseline_pause_24)
 
         timerTask = timer(period = 10) {
-            time++
+            time--
             val sec = time / 100
             val milli = time % 100
+
+            if(sec == 0 && milli == 0) timerTask?.cancel()
             runOnUiThread {
                 secTextView.text = "$sec"
                 milliTextView.text = "$milli"
@@ -69,28 +55,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pause() {
-        fab.setImageResource(R.drawable.baseline_play_arrow_24)
+//        fab.setImageResource(R.drawable.baseline_play_arrow_24)
         timerTask?.cancel()
     }
 
-    private fun recordLabTime() {
-        val lapTime = this.time
-        val textView = TextView(this)
-        textView.text = "$lab LAB : ${lapTime / 100}.${lapTime % 100}"
-
-        labLayout.addView(textView, 0)
-        lab++
-    }
 
     private fun reset() {
         timerTask?.cancel()
         time = 0
         isRunning = false
-        fab.setImageResource(R.drawable.baseline_play_arrow_24)
+//        fab.setImageResource(R.drawable.baseline_play_arrow_24)
         secTextView.text = "0"
         milliTextView.text = "00"
 
-        labLayout.removeAllViews()
+//        labLayout.removeAllViews()
         lab = 1
     }
 }
