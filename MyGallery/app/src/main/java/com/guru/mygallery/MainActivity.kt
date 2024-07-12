@@ -12,6 +12,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import java.util.Timer
+import kotlin.concurrent.timer
 
 class MainActivity : AppCompatActivity() {
     private val REQUEST_READ_EXTERNAL_STORAGE = 1000
@@ -78,10 +80,22 @@ class MainActivity : AppCompatActivity() {
             }
             cursor.close()
         }
-
+        
+        // 어댑터
         val adapter = MyPagerAdapter(supportFragmentManager)
         adapter.updateFragments(fragments)
         viewPager.adapter = adapter
+
+        // 3초마다 자동으로 슬라이드
+        timer(period = 3000){
+            runOnUiThread{
+                if(viewPager.currentItem < adapter.count - 1){
+                    viewPager.currentItem++
+                }else{
+                    viewPager.currentItem = 0
+                }
+            }
+        }
 
     }
 }
