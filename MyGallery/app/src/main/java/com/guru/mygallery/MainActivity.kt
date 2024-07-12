@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById<ViewPager>(R.id.viewPager)
 
         val readImagePermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) Manifest.permission.READ_MEDIA_IMAGES
-            else Manifest.permission.READ_EXTERNAL_STORAGE
+        else Manifest.permission.READ_EXTERNAL_STORAGE
 
 
         // 권한이 부여되었는지 확인
@@ -60,10 +60,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAllPhotos() {
         // 모든 사진 정보 가져오기
-        val projection = arrayOf(MediaStore.Images.Media._ID)
         val cursor = contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            projection,       // 가져올 항목 배열
+            null,       // 가져올 항목 배열
             null,             // 필요한 조건
             null,             // 조건
             MediaStore.Images.ImageColumns.DATE_TAKEN + " DESC") // 촬영 날짜 내림차순

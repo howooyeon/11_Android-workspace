@@ -13,14 +13,14 @@ private const val ARG_URI = "uri"
 class PhotoFragment : Fragment() {
     private var uri: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {    // 초기화
         super.onCreate(savedInstanceState)
         arguments?.let {
             uri = it.getString(ARG_URI)
         }
     }
 
-    override fun onCreateView(
+    override fun onCreateView(  // 뷰 출력
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {

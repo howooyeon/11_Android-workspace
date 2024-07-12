@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 
 
 class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    // 뷰페이저가 표시할 프래그먼트 목록
     private val items = ArrayList<Fragment>()
 
     // 프래그먼트의 갯수
